@@ -1,0 +1,43 @@
+{
+  "name": "webdev-clients-feedback",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "seed": "npx tsx prisma/seed.ts",
+    "create-admin": "node --loader ts-node/esm scripts/create-admin.ts"
+  },
+  "dependencies": {
+    "@fontsource/roboto": "^5.1.1",
+    "@headlessui/vue": "^1.7.23",
+    "@prisma/client": "^5.10.0",
+    "@tailwindcss/forms": "^0.5.7",
+    "@vee-validate/zod": "^4.12.5",
+    "argon2": "^0.31.2",
+    "chart.js": "^4.4.7",
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.4",
+    "nuxt": "^3.10.1",
+    "vee-validate": "^4.12.5",
+    "vue": "^3.4.15",
+    "vue-chartjs": "^5.3.2",
+    "vue-router": "^4.2.5",
+    "xlsx": "^0.18.5",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@types/node": "^20.17.14",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35",
+    "prisma": "^5.10.0",
+    "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}

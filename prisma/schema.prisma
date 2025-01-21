@@ -1,0 +1,38 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model Admin {
+    id        String   @id @default(cuid())
+    email     String   @unique
+    password  String
+    name      String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Review {
+    id          String   @id @default(cuid())
+    service     Service
+    content     String   @db.Text
+    rating      Int
+    clientEmail String
+    clientName  String
+    phoneNumber String?
+    companyName String?
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+enum Service {
+    WEBSITE_DEVELOPMENT
+    HOSTING
+    DOMAIN_SALES
+    CONSULTING
+    MAINTENANCE
+}
