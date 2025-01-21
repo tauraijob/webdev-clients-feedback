@@ -1,75 +1,70 @@
-# Nuxt Minimal Starter
+# WebDev Clients Feedback Platform
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A modern web application for collecting and managing client feedback and reviews.
 
-## Setup
+## Features
 
-Make sure to install dependencies:
+- Public review submission
+- Admin dashboard with analytics
+- Review management system
+- Rating and service-based filtering
+- Export functionality (Excel, PDF)
+- Responsive design
+- Secure authentication
 
+## Tech Stack
+
+- **Frontend**: Vue.js, Nuxt 3, TailwindCSS
+- **Backend**: Node.js, Nuxt Server
+- **Database**: PostgreSQL
+- **ORM**: Prisma
+- **Authentication**: JWT
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- PostgreSQL
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
 ```bash
-# npm
+git clone https://github.com/tauraijob/webdev-clients-feedback.git
+cd webdev-clients-feedback
+```
+
+2. Install dependencies
+```bash
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
+3. Set up environment variables
 ```bash
-# npm
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+4. Set up the database
+```bash
+npx prisma migrate dev
+npm run seed
+```
+
+5. Run the development server
+```bash
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+## Scripts
 
-Build the application for production:
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run seed` - Seed the database
+- `npm run create-admin` - Create admin user
 
-```bash
-# npm
-npm run build
+## License
 
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+MIT License
