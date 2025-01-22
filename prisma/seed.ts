@@ -1,11 +1,12 @@
 // @ts-check
 import { PrismaClient } from '@prisma/client'
+import argon2 from 'argon2'
 
 const prisma = new PrismaClient()
 
 async function main() {
     // Add more test reviews without deleting existing ones
-    const reviews = [
+    const reviews: any = [
         {
             service: 'WEBSITE_DEVELOPMENT',
             content: 'Outstanding website development. They understood our needs perfectly.',
@@ -45,9 +46,22 @@ async function main() {
             clientEmail: 'david@example.com',
             clientName: 'David Wilson',
             phoneNumber: null
-        }
+        },
+
     ]
 
+    await prisma.admin.upsert({
+        where: {
+            email: 'taurai@webdev.co.zw'
+        },
+        update: {
+            password: await argon2.hash('DevTeam24.$.$.')
+        },
+        create: {
+            email: 'taurai@webdev.co.zw',
+            password: await argon2.hash('DevTeam24.$.$.')
+        }
+    })
     for (const review of reviews) {
         // Check if review already exists to avoid duplicates
         const exists = await prisma.review.findFirst({
@@ -75,4 +89,5 @@ await main()
     })
     .finally(async () => {
         await prisma.$disconnect()
-    }) 
+    })
+
