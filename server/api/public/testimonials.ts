@@ -1,9 +1,9 @@
 import prisma from '../../utils/prisma'
 
 export default defineEventHandler(async (event) => {
-    // Enable CORS for public access
+    // Enable CORS for WordPress domain
     setResponseHeaders(event, {
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': 'https://reviews.devpreview.net',
         'Access-Control-Allow-Methods': 'GET',
         'Access-Control-Allow-Headers': 'Content-Type'
     })

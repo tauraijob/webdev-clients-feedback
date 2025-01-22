@@ -55,7 +55,12 @@ function webdev_testimonials_shortcode() {
     document.addEventListener('DOMContentLoaded', function() {
         const testimonialContainer = document.getElementById('webdev-testimonials');
         
-        fetch('YOUR_API_URL/api/public/testimonials')
+        fetch('http://localhost:3000/api/public/testimonials', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
+        })
             .then(response => response.json())
             .then(data => {
                 if (data.success && data.testimonials.length > 0) {
