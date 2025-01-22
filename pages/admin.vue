@@ -14,6 +14,7 @@ const { data: reviews, refresh, error, pending } = await useFetch('/api/reviews'
 const searchQuery = ref('')
 const selectedService = ref('')
 const selectedRating = ref('')
+const testimonialFilter = ref('')
 
 // Computed property for filtered reviews with null check
 const filteredReviews = computed(() => {
@@ -26,8 +27,10 @@ const filteredReviews = computed(() => {
       
     const matchesService = !selectedService.value || review.service === selectedService.value
     const matchesRating = !selectedRating.value || review.rating === parseInt(selectedRating.value)
+    const matchesTestimonial = testimonialFilter.value === '' || 
+      review.isTestimonial === (testimonialFilter.value === 'true')
     
-    return matchesSearch && matchesService && matchesRating
+    return matchesSearch && matchesService && matchesRating && matchesTestimonial
   })
 })
 
@@ -64,6 +67,26 @@ const handleExport = (format: 'excel' | 'pdf') => {
     exportToPDF(filteredReviews.value)
   }
   showExportOptions.value = false
+}
+
+const toggleTestimonial = async (review) => {
+  try {
+    const response = await $fetch(`/api/reviews/${review.id}/testimonial`, {
+      method: 'PATCH',
+      body: {
+        isTestimonial: !review.isTestimonial
+      }
+    })
+    
+    if (response.success) {
+      refresh()
+    } else {
+      throw new Error('Failed to update testimonial status')
+    }
+  } catch (error) {
+    console.error('Failed to toggle testimonial:', error)
+    alert(error.data?.message || 'Failed to update testimonial status')
+  }
 }
 </script>
 
@@ -141,6 +164,19 @@ const handleExport = (format: 'excel' | 'pdf') => {
               </select>
               <p class="mt-1 text-xs text-gray-500">Filter by rating</p>
             </div>
+
+            <!-- Testimonial Filter -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Testimonial Status</label>
+              <select
+                v-model="testimonialFilter"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+              >
+                <option value="">All Reviews</option>
+                <option value="true">Testimonials Only</option>
+                <option value="false">Non-Testimonials Only</option>
+              </select>
+            </div>
           </div>
 
           <!-- Filter Actions -->
@@ -150,7 +186,7 @@ const handleExport = (format: 'excel' | 'pdf') => {
             </div>
             <div class="flex space-x-3">
               <button
-                @click="() => { searchQuery = ''; selectedService = ''; selectedRating = '' }"
+                @click="() => { searchQuery = ''; selectedService = ''; selectedRating = ''; testimonialFilter = '' }"
                 class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -285,6 +321,22 @@ const handleExport = (format: 'excel' | 'pdf') => {
                         >
                           <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                        </button>
+                        <button
+                          @click="toggleTestimonial(review)"
+                          class="p-1.5 text-gray-400 hover:text-primary rounded-full hover:bg-gray-100 transition-colors duration-150"
+                          :title="review.isTestimonial ? 'Remove from Testimonials' : 'Add to Testimonials'"
+                        >
+                          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path 
+                              stroke-linecap="round" 
+                              stroke-linejoin="round" 
+                              stroke-width="2" 
+                              :d="review.isTestimonial 
+                                ? 'M5 13l4 4L19 7' 
+                                : 'M12 4v16m8-8H4'"
+                            />
                           </svg>
                         </button>
                       </div>

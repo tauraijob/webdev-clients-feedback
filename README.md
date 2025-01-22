@@ -1,70 +1,75 @@
-# WebDev Clients Feedback Platform
+# Nuxt Minimal Starter
 
-A modern web application for collecting and managing client feedback and reviews.
+Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-## Features
+## Setup
 
-- Public review submission
-- Admin dashboard with analytics
-- Review management system
-- Rating and service-based filtering
-- Export functionality (Excel, PDF)
-- Responsive design
-- Secure authentication
+Make sure to install dependencies:
 
-## Tech Stack
-
-- **Frontend**: Vue.js, Nuxt 3, TailwindCSS
-- **Backend**: Node.js, Nuxt Server
-- **Database**: PostgreSQL
-- **ORM**: Prisma
-- **Authentication**: JWT
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v16 or higher)
-- PostgreSQL
-- npm or yarn
-
-### Installation
-
-1. Clone the repository
 ```bash
-git clone https://github.com/tauraijob/webdev-clients-feedback.git
-cd webdev-clients-feedback
-```
-
-2. Install dependencies
-```bash
+# npm
 npm install
+
+# pnpm
+pnpm install
+
+# yarn
+yarn install
+
+# bun
+bun install
 ```
 
-3. Set up environment variables
-```bash
-cp .env.example .env
-# Edit .env with your configuration
-```
+## Development Server
 
-4. Set up the database
-```bash
-npx prisma migrate dev
-npm run seed
-```
+Start the development server on `http://localhost:3000`:
 
-5. Run the development server
 ```bash
+# npm
 npm run dev
+
+# pnpm
+pnpm dev
+
+# yarn
+yarn dev
+
+# bun
+bun run dev
 ```
 
-## Scripts
+## Production
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run seed` - Seed the database
-- `npm run create-admin` - Create admin user
+Build the application for production:
 
-## License
+```bash
+# npm
+npm run build
 
-MIT License
+# pnpm
+pnpm build
+
+# yarn
+yarn build
+
+# bun
+bun run build
+```
+
+Locally preview production build:
+
+```bash
+# npm
+npm run preview
+
+# pnpm
+pnpm preview
+
+# yarn
+yarn preview
+
+# bun
+bun run preview
+```
+
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

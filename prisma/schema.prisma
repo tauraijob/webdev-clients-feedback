@@ -17,16 +17,18 @@ model Admin {
 }
 
 model Review {
-    id          String   @id @default(cuid())
-    service     Service
-    content     String   @db.Text
-    rating      Int
-    clientEmail String
-    clientName  String
-    phoneNumber String?
-    companyName String?
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+    id               String   @id @default(cuid())
+    service          Service
+    content          String   @db.Text
+    rating           Int
+    clientEmail      String
+    clientName       String
+    phoneNumber      String?
+    companyName      String?
+    isTestimonial    Boolean  @default(false)
+    testimonialOrder Int?
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @updatedAt
 }
 
 enum Service {
